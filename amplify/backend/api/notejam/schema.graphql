@@ -1,0 +1,14 @@
+type Note @model @auth(rules: [{allow: public}]) @key(name: "byPad", fields: ["noteExtra"]) {
+  id: ID!
+  noteTitle: String!
+  noteText: String
+  Pad: Pad! @connection
+  noteExtra: ID
+}
+
+type Pad @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  padName: String!
+  Notes: [Note] @connection(keyName: "byPad", fields: ["id"])
+}
+ 
